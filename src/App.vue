@@ -6,6 +6,7 @@
 
       <MovieList title="Películas Familiares" genre="Family"/>
       <MovieList title="Películas de Comedia" genre="Comedy"/>
+      <MovieList title="Películas de Horror" genre="Horror"/>
 
     </div>
   </div>

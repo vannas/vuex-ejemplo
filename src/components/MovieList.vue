@@ -1,33 +1,32 @@
- <template>
+<template>
 
 <div class="container">
     <div class="row">
-        <div class="col s3" v-for="movie in Movies" :key="movie.id">
-        <div class="card indigo lighten-4">
-            <div class="card-image">
-                <img :src="movie.image">
-            </div>
-            <div class="card-content justify-text">
-                <p class="indigo-text ">{{ movie.title }}</p>
-            </div>
-        </div>
-        </div>
+        <h5>{{ title }}</h5>
+        <MovieItem v-for="movie in Movies" :key="movie.id" :movie=movie /> 
     </div>
 </div>
 
 </template>
 
 <script>
+
+import MovieItem from '@/components/MovieItem.vue'
+
 export default {
   name: 'MovieList',
+  components: {
+      MovieItem
+  },
   props: {
       title: String,
-      genre: String,
-      image: String
+      genre: String
   },
   computed: {
     // forma abreviada de traerme los getters
     Movies() {
+        return this.$store.getters.getMoviesByGenre(this.genre);
+        /*
         if(this.genre == 'Comedy'){
             return this.$store.getters.comedyMovies
         }
@@ -37,6 +36,7 @@ export default {
         else{
             return []
         }
+        */
     }
     
     //...mapGetters(["comedyMovies", "familyMovies"])
@@ -45,36 +45,9 @@ export default {
 </script>
 
 <style scoped>
-    .card{
-        display:inline-block;
-        padding:0px;
-        max-width:280px;
-        overflow:hidden;
-        
-    }
 
-    .card-image{
-        display:inline-block;        
-        vertical-align: top;
-        min-width:200px;
-        max-width: 280px;
-        max-height:260px;
-        overflow-y:hidden;
-        
-    }
-
-    .card-content{
-        display:inline-block;  
-        overflow:hidden;
-        height: 80px;
-        margin-top:-10px;
-    }
-
-    .card-content p{
-        position:relative;      
-        vertical-align: top;
-        font-size:18px;
-        
+    h5{
+        color:white;
     }
 
 </style>
